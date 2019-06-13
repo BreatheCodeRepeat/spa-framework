@@ -1,0 +1,31 @@
+{
+  "name": "houseautomationapp",
+  "version": "1.0.0",
+  "description": "houseautomationapp",
+  "private": true,
+  "scripts": {
+    "test": "test",
+    "compileTS": "./node_modules/.bin/tsc -p .",
+    "watchTS": "./node_modules/.bin/tsc -p . --watch",
+    "build": "./node_modules/.bin/tsc -p . && webpack --mode development",
+    "buildprod": "./node_modules/.bin/tsc -p . && webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "houseautomationapp"
+  },
+  "keywords": [
+    "js"
+  ],
+  "author": "Alexandru Avram",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1",
+    "typescript": "~3.2.2",
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4"
+  }
+}
