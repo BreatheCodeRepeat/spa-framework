@@ -1,9 +1,10 @@
 
-import Framework from "../framework/src/index";
+import Framework from "./framework/src/index";
 import paths from "./src/routing/router";
 
 import Train from "./src/train-component/index";
 import Car from "./src/car-component/index";
+import Nav from "./src/nav-component";
 
 var framework = new Framework(
     {
@@ -14,6 +15,9 @@ var framework = new Framework(
             },
             {"name":"car",
             "component":Car
+            },
+            {"name":"nav",
+            "component":Nav
             }
         ]
     }

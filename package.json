@@ -7,8 +7,8 @@
     "test": "test",
     "compileTS": "./node_modules/.bin/tsc -p .",
     "watchTS": "./node_modules/.bin/tsc -p . --watch",
-    "build": "./node_modules/.bin/tsc -p . && gulp build && webpack --mode development",
-    "buildprod": "./node_modules/.bin/tsc -p . && gulp build && webpack --mode production"
+    "build": "./node_modules/.bin/tsc -p . && webpack --mode development",
+    "buildprod": "./node_modules/.bin/tsc -p . &&  webpack --mode production"
   },
   "repository": {
     "type": "git",
