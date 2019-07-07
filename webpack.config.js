@@ -5,7 +5,7 @@ const devMode = process.env.NODE_ENV !== 'production';
 
 
 module.exports = {
-    entry: './dist/tsc/app/index.js',
+    entry: './dist/tsc/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'

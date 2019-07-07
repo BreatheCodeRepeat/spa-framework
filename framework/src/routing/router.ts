@@ -1,3 +1,5 @@
+import { BuilderComponent } from "../components/builder-component/builder";
+
 export class Router{
 
 
@@ -10,7 +12,13 @@ export class Router{
 
         this.paths = routes.map((el) => el.path)
 
+        this.initPathComponentPlaceHolder();
+
         this.bindPaths();
+    }
+
+    initPathComponentPlaceHolder(){
+        window.customElements.define("path-placeholder",BuilderComponent);
     }
 
     bindPaths(){
@@ -30,8 +38,10 @@ export class Router{
 
         let path =  event.target.getAttribute('bindPath');
 
-        if(this.checkPathMatch(path))
+        if(this.checkPathMatch(path)){
             window.history.pushState(null,null,path);
+            document.getElementsByName("path-placeholder").item(0).innerHTML = ;
+        }
     }
         
     checkPathMatch(path){

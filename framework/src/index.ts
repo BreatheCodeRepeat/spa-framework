@@ -11,7 +11,8 @@ export default class Framework{
     private componentEnding : string = "-component";
 
     constructor(properties) {
-
+        console.log(properties);
+        
 
         this.router = new Router(properties.routes);
 
