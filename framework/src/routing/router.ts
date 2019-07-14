@@ -40,7 +40,7 @@ export class Router{
 
         if(this.checkPathMatch(path)){
             window.history.pushState(null,null,path);
-            document.getElementsByName("path-placeholder").item(0).innerHTML = ;
+            document.getElementsByName("path-placeholder").item(0).innerHTML = "somethings" ;
         }
     }
         
