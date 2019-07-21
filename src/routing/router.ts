@@ -1,6 +1,7 @@
+import NavComponent from "../nav-component";
 
 
 export default [
-            { path:'train', component: Train }
+            // { path:'nav', component: NavComponent }
 
 ];
