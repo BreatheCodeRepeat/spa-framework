@@ -11,6 +11,7 @@ export class BuilderComponent extends HTMLElement{
 
     connectedCallback() {
         this.innerHTML = this.htmlContent;
+        this.setAttribute("style",this.cssContent);
     }
     
     

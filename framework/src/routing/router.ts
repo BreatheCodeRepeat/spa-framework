@@ -1,4 +1,5 @@
 import { BuilderComponent } from "../components/builder-component/builder";
+import { Component } from "../decorators/component-decorator";
 
 export class Router{
 
@@ -6,6 +7,14 @@ export class Router{
     public paths : string[];
 
     private hyperlinks ;
+
+    private compientEnding = "-component";
+
+    private htmlStart = "<";
+
+    private htmlEnd = ">";
+
+    private tagEnd = "</"
 
 
     constructor(routes){
@@ -18,30 +27,81 @@ export class Router{
     }
 
     initPathComponentPlaceHolder(){
-        window.customElements.define("path-placeholder",BuilderComponent);
+
+        try { 
+            
+            let location = window.location.pathname;
+            window.customElements.define("path-placeholder",PathPlaceholder);
+
+            if(this.checkPathMatch(location)){
+
+                let firstTag = this.htmlStart + location + this.compientEnding + this.htmlEnd;
+
+                let endTag = this.tagEnd + location + this.compientEnding + this.htmlEnd;
+
+                document.getElementsByTagName("path-placeholder").item(0).innerHTML = firstTag + endTag ;
+            }
+            else {
+
+                let firstTag = this.htmlStart + this.paths[0] + this.compientEnding + this.htmlEnd;
+
+                let endTag = this.tagEnd + this.paths[0] + this.compientEnding + this.htmlEnd;
+
+                document.getElementsByTagName("path-placeholder").item(0).innerHTML = firstTag + endTag;
+
+            }
+
+        } catch (error) {
+            console.log(error);
+            
+        }
+
     }
 
     bindPaths(){
 
-        let hyperlink : HTMLAnchorElement;
+        try {
+            let hyperlink : HTMLAnchorElement;
 
-        this.hyperlinks = document.getElementsByTagName('a');
+            this.hyperlinks = document.getElementsByTagName('a');
+    
+            for(hyperlink of this.hyperlinks){
+                if(hyperlink.getAttribute('bindPath'))
+                    hyperlink.addEventListener("click",(ev) => this.changePath(ev));
+            }
 
-        for(hyperlink of this.hyperlinks){
-            if(hyperlink.getAttribute('bindPath'))
-                hyperlink.addEventListener("click",(ev) => this.changePath(ev));
+        } catch (error) {
+            console.log(error);
         }
+
+
         
     }
 
     changePath(event){
 
-        let path =  event.target.getAttribute('bindPath');
+        try {
+            
+            if(event.target.getAttribute('bindPath')){
+                
+                let path =  event.target.getAttribute('bindPath');
 
-        if(this.checkPathMatch(path)){
-            window.history.pushState(null,null,path);
-            document.getElementsByName("path-placeholder").item(0).innerHTML = "somethings" ;
+                
+                let firstTag = this.htmlStart + path + this.compientEnding + this.htmlEnd;
+
+                let endTag = this.tagEnd + path + this.compientEnding + this.htmlEnd;
+
+                if(this.checkPathMatch(path)){
+                    window.history.pushState(null,null,path);
+                    document.getElementsByTagName("path-placeholder").item(0).innerHTML = firstTag + endTag ;
+                }
+            }
+        } catch (error) {
+            console.log(error);
+            
         }
+
+
     }
         
     checkPathMatch(path){
@@ -50,4 +110,12 @@ export class Router{
             .reduce((sum,next) => sum || next)
     }
 
+}
+
+
+export class PathPlaceholder extends BuilderComponent{
+    constructor(){
+        super();
+        this.innerHTML = "ceva"
+    }
 }

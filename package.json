@@ -20,7 +20,8 @@
   "author": "Alexandru Avram",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.4.1"
+    "jquery": "^3.4.1",
+    "materialize-css": "^1.0.0-rc.2"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
