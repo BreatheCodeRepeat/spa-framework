@@ -2,16 +2,12 @@ import { BuilderComponent } from "../components/builder-component/builder";
 
 export class Injector{
         
-    private static objects : Array<FactoryArray>;
+    private static objects : Array<FactoryArray> = [];
 
     static instatiate(classVar,opts,classname){
         let elementInstance =  new classVar(opts);
 
-
-        let factoryArray : FactoryArray  = {
-            classname:classname,
-            instance:elementInstance
-        }
+        let factoryArray : FactoryArray = new FactoryArray(classname,elementInstance);
 
         Injector.objects.push(factoryArray)
     }
@@ -36,9 +32,14 @@ export class Injector{
 
 }    
 
-interface FactoryArray{
+class FactoryArray{
     classname;
 
     instance;
+
+    constructor(classname,instance){
+        this.classname = classname;
+        this.instance = instance;
+    }
 
 }

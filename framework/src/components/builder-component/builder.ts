@@ -11,13 +11,15 @@ export class BuilderComponent extends HTMLElement{
 
     constructor(){
         super();
+        this.router = Injector.getObject("Router");
+
         
     }
 
     connectedCallback() {
         this.innerHTML = this.htmlContent;
         this.setAttribute("style",this.cssContent);
-        router = Injector.getObject("Router");
+        this.router.bindPaths();
     }
     
     
