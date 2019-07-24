@@ -1,7 +1,8 @@
 import { Injector } from "../../injector/injector";
 import { Router } from "../../routing/router";
+import OnInit, { OnDestroy } from "../Lifecycle-hooks/lifecyle";
 
-export class BuilderComponent extends HTMLElement{
+export class BuilderComponent extends HTMLElement implements OnInit,OnDestroy{
     
     private htmlContent :string = "";
 
@@ -16,6 +17,16 @@ export class BuilderComponent extends HTMLElement{
         
     }
 
+    OnInit(){
+        console.log("Default on init behaviour");
+        
+    }
+
+    OnDestroy(){
+        console.log("Default on destroy behaviour");
+
+    }
+
     connectedCallback() {
         this.innerHTML = this.htmlContent;
         this.setAttribute("style",this.cssContent);
@@ -26,10 +37,14 @@ export class BuilderComponent extends HTMLElement{
         catch(error){
             console.log(error);
         }
+
+        this.OnInit();
     }
     
     
     disconnectedCallback() {
         this.router.unBindPaths(this);
+
+        this.OnDestroy();
     }  
 }
