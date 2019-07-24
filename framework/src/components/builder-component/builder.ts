@@ -19,8 +19,17 @@ export class BuilderComponent extends HTMLElement{
     connectedCallback() {
         this.innerHTML = this.htmlContent;
         this.setAttribute("style",this.cssContent);
-        this.router.bindPaths();
+
+        try{
+            this.router.bindPaths(this);
+        }
+        catch(error){
+            console.log(error);
+        }
     }
     
     
+    disconnectedCallback() {
+        this.router.unBindPaths(this);
+    }  
 }

@@ -6,8 +6,8 @@ import LightBulbComponent from "../lightbulb-component";
 
 export default [
             { path:'dashboard', component: MainDashboardComponent },
-            { path:'hometemperature', component: TemperatureComponent },
-            { path:'lights', component: LightBulbComponent },
+            { path:'temperature', component: TemperatureComponent },
+            { path:'lightbulb', component: LightBulbComponent },
 
 
 ];

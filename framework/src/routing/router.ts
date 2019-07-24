@@ -6,8 +6,6 @@ export class Router{
 
     public paths : string[];
 
-    private hyperlinks ;
-
     private compientEnding = "-component";
 
     private htmlStart = "<";
@@ -23,7 +21,6 @@ export class Router{
 
         this.initPathComponentPlaceHolder();
 
-        this.bindPaths();
     }
 
     initPathComponentPlaceHolder(){
@@ -58,16 +55,20 @@ export class Router{
 
     }
 
-    bindPaths(){
+    bindPaths(component : HTMLElement){
 
         try {
+            let eventsArr;
+
             let hyperlink : HTMLAnchorElement;
 
-            this.hyperlinks = document.getElementsByTagName('a');
+            let hyperlinks = component.getElementsByTagName('a');
     
-            for(hyperlink of this.hyperlinks){
+            let hyperlinksArr = Array.from(hyperlinks);
+
+            for(hyperlink of hyperlinksArr){
                 if(hyperlink.getAttribute('bindPath'))
-                    hyperlink.addEventListener("click",(ev) => this.changePath(ev));
+                eventsArr = hyperlink.addEventListener("click",(ev) => this.changePath(ev));
             }
 
         } catch (error) {
@@ -77,6 +78,26 @@ export class Router{
 
         
     }
+   
+    unBindPaths(component : HTMLElement){
+        try {
+            let hyperlink : HTMLAnchorElement;
+
+            let hyperlinks = component.getElementsByTagName('a');
+    
+            let hyperlinksArr = Array.from(hyperlinks);
+
+            for(hyperlink of hyperlinksArr){
+                if(hyperlink.getAttribute('bindPath'))
+                    hyperlink.removeEventListener("click",component.dispatchEvent);
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
 
     changePath(event){
 
