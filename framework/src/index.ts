@@ -3,18 +3,16 @@ import {Router} from "./routing/router";
 // import * as $ from "jquery";
 // import './css-loader.js';
 import './decorators/component-decorator';
+import { Injector } from "./injector/injector";
 
 export default class Framework{
-
-    router : Router;
 
     private componentEnding : string = "-component";
 
     constructor(properties) {
         console.log(properties);
         
-
-        this.router = new Router(properties.routes);
+        Injector.instatiate(Router,properties.routes,"Router");
 
         this.addToDom(properties.components);
 

@@ -4,6 +4,8 @@ import paths from "./src/routing/router";
 import NavComponent from "./src/nav-component";
 import FooterComponent from "./src/footer-component";
 import MainDashboardComponent from "./src/maindashboard-component";
+import LightBulbComponent from "./src/lightbulb-component";
+import TemperatureComponent from "./src/temperature-component";
 
 
 
@@ -19,6 +21,12 @@ var framework = new Framework(
             },
             {"name":"dashboard",
             "component":MainDashboardComponent
+            },
+            {"name":"lightbulb",
+            "component":LightBulbComponent
+            },
+            {"name":"temperature",
+            "component":TemperatureComponent
             }
         ]
     }
