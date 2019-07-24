@@ -1,7 +1,8 @@
 import NavComponent from "../nav-component";
+import MainDashboardComponent from "../maindashboard-component";
 
 
 export default [
-            // { path:'nav', component: NavComponent }
+            { path:'dashboard', component: MainDashboardComponent }
 
 ];
