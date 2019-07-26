@@ -32,8 +32,7 @@ export abstract class BuilderComponent extends HTMLElement{
         catch(error){
             console.log(error);
         }
-
-        this.OnInit();
+        this.addEventListener("load",this.OnInit());
     }
     
     

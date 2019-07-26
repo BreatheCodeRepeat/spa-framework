@@ -20,7 +20,6 @@
   "author": "Alexandru Avram",
   "license": "ISC",
   "dependencies": {
-    "jquery": "^3.4.1",
     "materialize-css": "^1.0.0"
   },
   "devDependencies": {

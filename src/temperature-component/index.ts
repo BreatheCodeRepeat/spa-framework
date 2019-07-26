@@ -3,7 +3,7 @@ import { Component } from "../../framework/src/decorators/component-decorator";
 import MaterializeService from '../services/materialize-service'
 
 @Component(
-    `temp`,
+    `<canvas>`,
   ``
 
 )
