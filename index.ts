@@ -6,8 +6,7 @@ import FooterComponent from "./src/footer-component";
 import MainDashboardComponent from "./src/maindashboard-component";
 import LightBulbComponent from "./src/lightbulb-component";
 import TemperatureComponent from "./src/temperature-component";
-
-
+import MaterializeService from "./src/services/materialize-service";
 
 var framework = new Framework(
     {
@@ -28,6 +27,9 @@ var framework = new Framework(
             {"name":"temperature",
             "component":TemperatureComponent
             }
+        ],
+        "services" : [
+            MaterializeService
         ]
     }
 );

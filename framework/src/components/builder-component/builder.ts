@@ -1,9 +1,10 @@
 import { Injector } from "../../injector/injector";
 import { Router } from "../../routing/router";
-import OnInit, { OnDestroy } from "../Lifecycle-hooks/lifecyle";
 
-export class BuilderComponent extends HTMLElement implements OnInit,OnDestroy{
+export abstract class BuilderComponent extends HTMLElement{
+
     
+
     private htmlContent :string = "";
 
     private cssContent :string = "";
@@ -12,26 +13,20 @@ export class BuilderComponent extends HTMLElement implements OnInit,OnDestroy{
 
     constructor(){
         super();
-        this.router = Injector.getObject("Router");
-
-        
-    }
-
-    OnInit(){
-        console.log("Default on init behaviour");
-        
-    }
-
-    OnDestroy(){
-        console.log("Default on destroy behaviour");
+        this.router = Injector.getObject(Router);
 
     }
+
+    abstract OnInit();
+
+    abstract OnDestroy();
 
     connectedCallback() {
         this.innerHTML = this.htmlContent;
         this.setAttribute("style",this.cssContent);
 
         try{
+            if(this.tagName != "PATH-PLACEHOLDER")
             this.router.bindPaths(this);
         }
         catch(error){

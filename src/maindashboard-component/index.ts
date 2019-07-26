@@ -1,5 +1,6 @@
 import { BuilderComponent } from "../../framework/src/components/builder-component/builder";
 import { Component } from "../../framework/src/decorators/component-decorator";
+import MaterializeService from '../services/materialize-service'
 
 
 @Component(
@@ -22,4 +23,11 @@ export default class MainDashboardComponent extends BuilderComponent{
         super();
     }
 
+    OnDestroy(){
+
+    }
+
+    OnInit(){
+
+    }
 }

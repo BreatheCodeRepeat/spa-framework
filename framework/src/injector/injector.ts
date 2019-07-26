@@ -4,21 +4,29 @@ export class Injector{
         
     private static objects : Array<FactoryArray> = [];
 
-    static instatiate(classVar,opts,classname){
-        let elementInstance =  new classVar(opts);
+    static instatiate(classVar,opts?){
 
-        let factoryArray : FactoryArray = new FactoryArray(classname,elementInstance);
+        let elementInstance;
+
+        if(opts != undefined)
+             elementInstance =  new classVar(opts);
+
+        else{
+            elementInstance =  new classVar();
+        }
+
+        let factoryArray : FactoryArray = new FactoryArray(classVar.name,elementInstance);
 
         Injector.objects.push(factoryArray)
     }
 
-    static getObject(name : String){
+    static getObject(classVar){
 
 
         let object;
 
         Injector.objects.forEach((el) => {
-            if(el.classname === name){
+            if(el.classname === classVar.name){
                 object = el.instance;
             }
         })

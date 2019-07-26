@@ -137,6 +137,14 @@ export class Router{
 export class PathPlaceholder extends BuilderComponent{
     constructor(){
         super();
-        this.innerHTML = "ceva"
+    }
+
+    
+    OnDestroy(){
+
+    }
+
+    OnInit(){
+
     }
 }

@@ -14,4 +14,11 @@ export default class LightBulbComponent extends BuilderComponent{
         super();
     }
 
+    OnDestroy(){
+
+    }
+
+    OnInit(){
+
+    }
 }

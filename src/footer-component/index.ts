@@ -22,4 +22,11 @@ export default class FooterComponent extends BuilderComponent{
         super();
     }
 
+    OnDestroy(){
+
+    }
+
+    OnInit(){
+
+    }
 }
