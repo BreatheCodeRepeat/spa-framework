@@ -20,6 +20,8 @@
   "author": "Alexandru Avram",
   "license": "ISC",
   "dependencies": {
+    "canvas-gauges": "^2.1.5",
+    "d3": "^5.9.7",
     "materialize-css": "^1.0.0"
   },
   "devDependencies": {
