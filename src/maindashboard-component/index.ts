@@ -3,7 +3,7 @@ import { Component } from "../../framework/src/decorators/component-decorator";
 import * as d3 from "d3";
 
 @Component(
-    `<div class="plot></div>"`,
+    `<div class="plot"></div>`,
   ``
 
 )
@@ -11,6 +11,11 @@ export default class MainDashboardComponent extends BuilderComponent{
 
 
     data = [];
+
+
+    width;
+
+    height;
 
     constructor(){
         super();
@@ -24,10 +29,12 @@ export default class MainDashboardComponent extends BuilderComponent{
 
       this.generateData();
 
+      this.width = 300;
+      this.height = 500;
 
-      let node = this.createPlot(200,500);      
+      let node = this.createPlot();      
 
-      this.querySelector("plot").appendChild(node);
+      this.getElementsByClassName("plot").item(0).appendChild(node);
 
     }
 
@@ -51,13 +58,14 @@ export default class MainDashboardComponent extends BuilderComponent{
 
       return d3.line()
         .x(function(d) { return self.x(d.date); })
-        .y(function(d) { return self.y(d.value); });
+        .y(function(d) { return self.y(d.value); })
+        .curve(d3.curveMonotoneX);
     }
 
 
-    createPlot(width,height){
+    createPlot(){
       let svg = d3.create("svg")
-      .attr("viewBox", [0, 0, width, height]);
+      .attr("viewBox", [0, 0, this.width, this.height]);
       
       svg.append("path")
           .datum(this.data)
@@ -71,10 +79,17 @@ export default class MainDashboardComponent extends BuilderComponent{
       return svg.node();
     }
 
-    y(d) {
-      return d[1];
-    }
-    x(d){
-      return d[1];
-    }
+    x(data){
+      return d3.scaleTime()
+      .domain(d3.extent(data, function(d) { return d.date; }))
+      .range([ 0, this.width ]);
+    } 
+
+  // Add Y axis
+  y(data){
+    return d3.scaleLinear()
+    .domain([0, d3.max(data, function(d) { return +d.value; })])
+    .range([ this.height, 0 ]);
+  }  
+ 
 }
