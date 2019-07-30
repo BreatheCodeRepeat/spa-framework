@@ -12,67 +12,111 @@ import { Injector } from "../../framework/src/injector/injector";
         <label class="active" for="temperature">Change temperature</label>
       </div>
     </div>
+    <a class="waves-effect waves-light btn">Change temperature</a>
     <div class="temp"></div>`,
   ``
 
 )
 export default class TemperatureComponent extends BuilderComponent{
 
-    desiredTemp :number = 25;
-
     temperature : number = 25;
 
-    step :number = 0.01;
+    step :number = 0.1;
 
-    lock : boolean = false;
+    lock = 0;
 
     constructor(){
         super();
     }
 
-    OnDestroy(){}
+    OnDestroy(){
+        this.lock = 1;
+        this.getElementsByClassName("btn").item(0).removeEventListener("click",this.dispatchEvent);
+    }
 
     OnInit(){
 
-        this.getElementsByClassName("temperature").item(0).addEventListener("keyup",() => {
+        this.getElementsByClassName("btn").item(0).addEventListener("click", async () => {
             
-            let inputElem = this.getElementsByClassName("temperature").item(0) as HTMLInputElement;
+            if(this.lock === 0){
+                let inputElem = this.getElementsByClassName("temperature").item(0) as HTMLInputElement;
+                await this.changeTemp(Number.parseInt(inputElem.value))
+                this.lock = 1;
+                this.changeTempValue();
+            }
 
-            this.desiredTemp = Number.parseFloat(inputElem.value);
-            this.changeTemp();
-            this.lock = true;
-            this.changeTempValue();
+
         })
         this.changeTempValue();
     }
 
 
     changeTempValue(){
-        this.getElementsByClassName("temp").item(0).innerHTML =  "" + this.temperature;
+        this.getElementsByClassName("temp").item(0).innerHTML =  "" + Math.floor(this.temperature);
 
     }
 
-    changeTemp(){
+    async changeTemp(temp : number){
 
-        let i=1;
+        let i = 1;
+        let lock = 0;
 
-        let localLock = this.lock;
+        while(Math.floor(temp) != Math.floor(this.temperature) && i<1000){
+            i++;
+            if(temp > this.temperature){
+                if(Math.floor(temp) == Math.floor(this.temperature) || lock == 1) {
+                    this.lock = 0;
+                    break;
+                    
+                }
 
-        while(Math.floor(this.desiredTemp) != Math.floor(this.temperature)){
-            if(this.desiredTemp > this.temperature)
+                setTimeout(
+                    () =>{
+                        if(Math.floor(temp) == Math.floor(this.temperature)) {
+                            lock = 1;
+                            this.lock = 0;
+                        }
 
-                        this.temperature -= this.step;
+                        else{
+                            if(lock == 0){
+                                this.temperature += this.step;
+                                this.changeTempValue();
+                            }
 
+                        }
+                    },200*i
+                )
+
+
+
+            }
 
             else{
+                if(Math.floor(temp) == Math.floor(this.temperature) || lock == 1) break;
 
-                        this.temperature += this.step;
+
+                setTimeout(
+                    () =>{
+
+                        if(Math.floor(temp) == Math.floor(this.temperature)) {
+                            lock = 1;
+                            this.lock = 0;
+                        }
+                        else{
+                            if(lock == 0){
+                                this.temperature -= this.step;
+                                this.changeTempValue();
+                            }
+                        }
+
+                    },200*i
+                )
+
 
             }
         }
 
-        if(this.desiredTemp == this.temperature)
-            this.lock = false;
+        
     }
 
 
