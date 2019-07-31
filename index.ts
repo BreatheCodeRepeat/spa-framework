@@ -6,7 +6,7 @@ import MainDashboardComponent from "./src/maindashboard-component";
 import LightBulbComponent from "./src/lightbulb-component";
 import TemperatureComponent from "./src/temperature-component";
 import MaterializeService from "./src/services/materialize-service";
-
+import HouseParamService from "./src/services/houseparam-service"
 
 var framework = new Framework(
     {
@@ -26,7 +26,8 @@ var framework = new Framework(
             }
         ],
         "services" : [
-            MaterializeService
+            MaterializeService,
+            HouseParamService
         ]
     }
 );

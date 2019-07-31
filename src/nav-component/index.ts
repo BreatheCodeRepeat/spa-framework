@@ -24,7 +24,7 @@ import { Injector } from "../../framework/src/injector/injector";
 )
 export default class NavComponent extends BuilderComponent{
 
-    private matService = Injector.getObject(MaterializeService);
+    private matService : MaterializeService = Injector.getObject(MaterializeService);
 
     constructor(){
         super();

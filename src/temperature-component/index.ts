@@ -1,7 +1,8 @@
 import { BuilderComponent } from "../../framework/src/components/builder-component/builder";
 import { Component } from "../../framework/src/decorators/component-decorator";
-import MaterializeService from '../services/materialize-service'
+import MaterializeService from '../services/houseparam-service'
 import { Injector } from "../../framework/src/injector/injector";
+import HouseParamService from "../services/houseparam-service";
 
 
 @Component(
@@ -13,7 +14,9 @@ import { Injector } from "../../framework/src/injector/injector";
       </div>
     </div>
     <a class="waves-effect waves-light btn">Change temperature</a>
-    <div class="temp"></div>`,
+    <p>Actual temperature:
+        <div class="temp"></div>
+    </p>`,
   ``
 
 )
@@ -25,6 +28,8 @@ export default class TemperatureComponent extends BuilderComponent{
 
     lock = 0;
 
+    houseParamService : HouseParamService;
+
     constructor(){
         super();
     }
@@ -35,6 +40,10 @@ export default class TemperatureComponent extends BuilderComponent{
     }
 
     OnInit(){
+
+        this.houseParamService = Injector.getObject(HouseParamService);
+
+        this.temperature = this.houseParamService.temperature;
 
         this.getElementsByClassName("btn").item(0).addEventListener("click", async () => {
             
@@ -53,6 +62,7 @@ export default class TemperatureComponent extends BuilderComponent{
 
     changeTempValue(){
         this.getElementsByClassName("temp").item(0).innerHTML =  "" + Math.floor(this.temperature);
+        this.houseParamService.temperature = this.temperature;
 
     }
 
