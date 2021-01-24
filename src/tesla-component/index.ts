@@ -4,13 +4,13 @@ import { Injector } from "../../framework/src/injector/injector";
 import ExternalLibraryService from "../services/externallibrary.service";
 
 @Component(
-    `<h1>Welcome to The Financial Analysis Tool</h1>
+    `<h1>Tesla Stock</h1>
     <svg width="600" height="500"></svg>
     `,
   ``
 
 )
-export default class MainDashboardComponent extends BuilderComponent{
+export default class TeslaStockComponent extends BuilderComponent{
 
     externalLibraryService : ExternalLibraryService = Injector.getObject(ExternalLibraryService);
 
@@ -25,7 +25,7 @@ export default class MainDashboardComponent extends BuilderComponent{
     async OnInit(){
 
         let d3 = this.externalLibraryService.getD3Library();
-
+    
         var svg = d3.select("svg"),
         margin = 200,
         width = svg.attr("width") - margin,

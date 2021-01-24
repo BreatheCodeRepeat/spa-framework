@@ -3,10 +3,10 @@ import Framework from "./framework/src/index";
 import paths from "./src/routing/router";
 import NavComponent from "./src/nav-component";
 import MainDashboardComponent from "./src/maindashboard-component";
-import LightBulbComponent from "./src/lightbulb-component";
-import TemperatureComponent from "./src/temperature-component";
-import MaterializeService from "./src/services/materialize-service";
-import HouseParamService from "./src/services/houseparam-service"
+import ExternalLibraryService from "./src/services/externallibrary.service";
+import AppleStockComponent from "./src/apple-component";
+import TeslaStockComponent from "./src/tesla-component";
+
 
 var framework = new Framework(
     {
@@ -18,16 +18,15 @@ var framework = new Framework(
             {"name":"dashboard",
             "component":MainDashboardComponent
             },
-            {"name":"lightbulb",
-            "component":LightBulbComponent
+            {"name":"apple",
+            "component":AppleStockComponent
             },
-            {"name":"temperature",
-            "component":TemperatureComponent
+            {"name":"tesla",
+            "component":TeslaStockComponent
             }
         ],
         "services" : [
-            MaterializeService,
-            HouseParamService
+            ExternalLibraryService
         ]
     }
 );

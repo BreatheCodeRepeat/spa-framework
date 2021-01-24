@@ -4,13 +4,13 @@ import { Injector } from "../../framework/src/injector/injector";
 import ExternalLibraryService from "../services/externallibrary.service";
 
 @Component(
-    `<h1>Welcome to The Financial Analysis Tool</h1>
+    `<h1>Apple stock</h1>
     <svg width="600" height="500"></svg>
     `,
   ``
 
 )
-export default class MainDashboardComponent extends BuilderComponent{
+export default class AppleStockComponent extends BuilderComponent{
 
     externalLibraryService : ExternalLibraryService = Injector.getObject(ExternalLibraryService);
 
